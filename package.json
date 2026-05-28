@@ -15,9 +15,8 @@
     "@middy/http-error-handler": "^7.6.5",
     "@middy/http-json-body-parser": "^7.6.5",
     "@middy/validator": "^7.6.5",
-    "ajv": "^8.20.0",
-    "ajv-formats": "^3.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.6"
