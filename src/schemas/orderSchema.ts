@@ -1,28 +1,14 @@
-const orderSchema = {
-    type: 'object',
-    required: ['body'],
-    properties: {
-        body: {
-            type: 'object',
-            required: ['orderID', 'customerEmail', 'items'],
-            properties: {
-                orderID: {
-                    type: 'string',
-                    format: 'uuid'
-                },
-                customerEmail: {
-                    type: 'string',
-                    format: 'email'
-                },
-                items: {
-                    type: 'array',
-                },
-                discountCode: {
-                    type: 'string'
-                }
-            }
-        }
-    }
-}
+import { z } from "zod";
+import { OrderItemSchema } from "./orderItemSchema.js";
 
-export { orderSchema };
+const OrderSchema = z.object({
+    orderID: z.uuid(),
+    customerEmail: z.email(),
+    items: z.array(OrderItemSchema),
+    discountCode: z.string().optional()
+});
+
+type Order = z.infer<typeof OrderSchema>;
+
+export type { Order };
+export { OrderSchema }; 

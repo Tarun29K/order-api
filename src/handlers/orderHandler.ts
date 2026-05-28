@@ -1,13 +1,11 @@
 import middy from '@middy/core';
 import httpJsonBodyParser from '@middy/http-json-body-parser';
 import httpErrorHandler from '@middy/http-error-handler';
-import validator from '@middy/validator';
-import { transpileSchema } from '@middy/validator/transpile'
-import { orderSchema } from '../schemas/orderSchema.js';
+import { OrderSchema, type Order } from '../schemas/orderSchema.js';
 import type { OrderResponse } from '../types/order.js';
 
-const orderHandler = async (event: { body: any; }) => {
-    const order = event.body;
+const orderHandler = async (event: { body: unknown }) => {
+    const order = OrderSchema.parse(event.body);
     console.log(order);
     const items = order.items;
     let orderTotal = 0;
@@ -30,6 +28,5 @@ const orderHandler = async (event: { body: any; }) => {
     }
 }
 
-const eventSchema = transpileSchema(orderSchema);
-const handler = middy(orderHandler).use(httpJsonBodyParser()).use(validator( { eventSchema } )).use(httpErrorHandler());
+const handler = middy(orderHandler).use(httpJsonBodyParser()).use(httpErrorHandler());
 export { handler };
