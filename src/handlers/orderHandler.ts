@@ -29,4 +29,4 @@ const orderHandler = async (event: { body: unknown }) => {
 }
 
 const handler = middy(orderHandler).use(httpJsonBodyParser()).use(httpErrorHandler());
-export { handler };
+export { handler, orderHandler };
