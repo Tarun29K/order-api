@@ -1,7 +1,7 @@
 import middy from '@middy/core';
 import httpJsonBodyParser from '@middy/http-json-body-parser';
 import httpErrorHandler from '@middy/http-error-handler';
-import { OrderSchema, type Order } from '../schemas/orderSchema.js';
+import { OrderSchema } from '../schemas/orderSchema.js';
 import type { OrderResponse } from '../types/order.js';
 
 const orderHandler = async (event: { body: unknown }) => {
