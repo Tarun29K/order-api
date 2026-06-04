@@ -1,17 +1,12 @@
-const orderItemSchema = {
-    type: 'object',
-    required: ['productID', 'quantity', 'price'],
-    properties: {
-        productID: {
-            type: 'string'
-        },
-        quantity: {
-            type: 'number'
-        },
-        price: {
-            type: 'number'
-        }
-    }
-}
+import { z } from "zod";
 
-export { orderItemSchema };
+const OrderItemSchema = z.object({
+    productID: z.string(),
+    quantity: z.number(),
+    price: z.number()
+});
+
+type OrderItem = z.infer<typeof OrderItemSchema>;
+
+export  { OrderItemSchema } ;
+export type { OrderItem };
